@@ -1,5 +1,5 @@
 [![GitHub release](https://img.shields.io/github/release/paresthesia69/fabricator-esx.svg)]()
-[![Build Status](https://travis-ci.org/paresthesia69/fabricator-esx.svg)](https://travis-ci.org/paresthesia69/fabricator-esx) [![devDependency Status](https://david-dm.org/paresthesia69/fabricator-esx/dev-status.svg)](https://david-dm.org/paresthesia69/fabricator-esx#info=devDependencies) [![Join the chat at https://gitter.im/paresthesia69/fabricator-esx](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paresthesia69/fabricator-esx?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/paresthesia69/fabricator-esx.svg)](https://travis-ci.org/paresthesia69/fabricator-esx) [![devDependency Status](https://david-dm.org/paresthesia69/fabricator-esx/dev-status.svg)](https://david-dm.org/paresthesia69/fabricator-esx#info=devDependencies) 
 
 <p align="center">
   <img src="http://fbrctr.github.io/assets/toolkit/images/logo.svg" width="500">
