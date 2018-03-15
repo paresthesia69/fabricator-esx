@@ -3,16 +3,28 @@
 <head>
 
 	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>{{title}}</title>
 
 	{{#if fabricator}}<link rel="stylesheet" href="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/fabricator/styles/f.css">{{/if}}
 
+  <!-- external styles -->
+  <!-- Links to external font styles could go here -->
+  <!-- /external styles -->
+
+  <!-- vendor styles -->
+  <link rel="stylesheet" href="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/toolkit/styles/vendor.css">
+  <!-- /vendor styles -->
+
 	<!-- toolkit styles -->
 	<link rel="stylesheet" href="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/toolkit/styles/toolkit.css">
 	<!-- /toolkit styles -->
+
+  <!-- demo styles -->
+  <link rel="stylesheet" href="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/toolkit/styles/demo.css">
+  <!-- /demo styles -->
 
 </head>
 <body>
@@ -33,9 +45,17 @@
 	<script src="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/fabricator/scripts/f.js"></script>
 	{{/if}}
 
+  <!-- vendor scripts -->
+  <script src="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/toolkit/scripts/vendor.js"></script>
+  <!-- /vendor scripts -->
+
 	<!-- toolkit scripts -->
 	<script src="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/toolkit/scripts/toolkit.js"></script>
 	<!-- /toolkit scripts -->
+
+  <!-- demo scripts -->
+  <script src="{{#if baseurl}}{{ baseurl }}/{{/if}}assets/toolkit/scripts/demo.js"></script>
+  <!-- /demo scripts -->
 
 </body>
 </html>

@@ -1,34 +1,36 @@
 const path = require('path');
 const webpack = require('webpack');
 
-
 /**
  * Define plugins based on environment
  * @param {boolean} isDev If in development mode
  * @return {Array}
  */
-function getPlugins(isDev) {
+function getPlugins(config) {
 
   const plugins = [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({}),
   ];
 
+  const isDev = config.dev;
+
   if (isDev) {
     plugins.push(new webpack.NoErrorsPlugin());
   } else {
+    let uglifySettings = {minimize: true, sourceMap: false, compress: {warnings: false}};
+    if (config.jsSourcemap) {
+      config.devtool = 'source-map';
+      uglifySettings = {
+        minimize: false, sourceMap: config.jsSourcemap,
+        compress: {drop_console: false, pure_funcs: ['console.log', 'console.warn']}
+      };
+    }
     plugins.push(new webpack.optimize.DedupePlugin());
-    plugins.push(new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      sourceMap: false,
-      compress: {
-        warnings: false,
-      },
-    }));
+    plugins.push(new webpack.optimize.UglifyJsPlugin(uglifySettings));
   }
 
   return plugins;
-
 }
 
 
@@ -60,6 +62,8 @@ module.exports = (config) => {
     entry: {
       'fabricator/scripts/f': config.scripts.fabricator.src,
       'toolkit/scripts/toolkit': config.scripts.toolkit.src,
+      'toolkit/scripts/demo': config.scripts.demo.src,
+      'toolkit/scripts/vendor': config.scripts.vendor.src,
     },
     output: {
       path: path.resolve(__dirname, config.dest, 'assets'),
@@ -69,7 +73,7 @@ module.exports = (config) => {
     resolve: {
       extensions: ['', '.js'],
     },
-    plugins: getPlugins(config.dev),
+    plugins: getPlugins(config),
     module: {
       loaders: getLoaders(),
     },

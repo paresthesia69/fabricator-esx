@@ -1,89 +1,122 @@
+@import "variables";
+
 .f-item-group {
-	@include clearfix;
-	margin-top: 3rem;
-	margin-bottom: 3rem;
-	padding-bottom: 3rem;
-	border-bottom: 1px solid color(light);
+  @include clearfix;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-bottom: 1px solid color(light);
 
-	&:last-child {
-		border-bottom: 0;
-		margin-bottom: 0;
-	}
+  @media only screen and (max-width: 1079px) {
+    padding-left: 0;
+  }
 
-	& ~ & {
-		margin-top: 0;
-	}
+  @media (min-width: $base-min-width) {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 
-	& > & {
-		padding-bottom: 1.5rem;
-		margin-bottom: 1.5rem;
-		border-bottom: 0;
+  &:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
 
-		&:first-of-type {
-			margin-top: 0;
-		}
+  & ~ & {
+    margin-top: 0;
+  }
 
-		&:last-child {
-			margin-bottom: 0;
-			padding-bottom: 0;
-		}
-	}
+  & > & {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 0;
+    padding-left: 0;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .f-item-code {
-	margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .f-item-preview {
-	@include clearfix;
+  @include clearfix;
+  padding: 1rem 0 0 0;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media only screen and (max-width: 1079px) {
+
+  }
 }
 
 .f-item-border-bottom {
-	border-bottom: 1px solid color(light);
+  border-bottom: 1px solid color(light);
 }
 
 .f-item-heading-group {
-	@include clearfix;
-	margin-bottom: 2rem;
-	vertical-align: middle;
+  @include clearfix;
+  margin-bottom: 1rem;
+  vertical-align: middle;
+
+  @media only screen and (max-width: 1079px) {
+    padding-left: 1rem;
+  }
 }
 
 .f-item-heading {
-	margin-top: 0;
-	margin-bottom: 0;
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
 }
 
-
 .f-item-controls {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1rem;
 
-	.f-control {
-		width: 0.875rem;
-		height: 0.875rem;
-		display: block;
-		float: left;
+  .f-control {
+    width: 0.875rem;
+    height: 0.875rem;
+    display: block;
+    float: left;
 
-		&:hover {
-			use {
-				fill: color(normal);
-			}
-		}
+    &:hover {
+      use {
+        fill: color(normal);
+      }
+    }
 
-		use {
-			fill: color(light);
-		}
-	}
+    use {
+      fill: color(light);
+    }
+  }
 }
 
 .f-item-hidden {
-	display: none;
+  display: none;
 }
 
 .f-item-notes {
-	font-size: 0.875rem;
+  color: color(dark);
+  font-size: 0.875rem;
+  p {
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 0.3em;
+    margin-bottom: 1rem;
+  }
 }
