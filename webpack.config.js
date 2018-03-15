@@ -33,7 +33,6 @@ function getPlugins(config) {
   return plugins;
 }
 
-
 /**
  * Define loaders
  * @return {Array}
