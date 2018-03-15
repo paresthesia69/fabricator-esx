@@ -5,11 +5,12 @@
   <img src="http://fbrctr.github.io/assets/toolkit/images/logo.svg" width="500">
 </p>
 
-# Fabricator
+# Fabricator-ESX
 
 > _fabricate_ - to make by assembling parts or sections.
+> _esx_ - using modern build to follow modern ES coding semantics.
 
-Fabricator is a tool for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"](http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
+Fabricator-ESX (from the original [Fabricator](https://github.com/fbrctr/fabricator)) is a tool forked for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"](http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
 
 ## Quick Start
 
