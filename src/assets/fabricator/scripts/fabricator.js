@@ -4,7 +4,7 @@ require('./prism');
  * Global `fabricator` object
  * @namespace
  */
-const fabricator = window.fabricator = {};
+const fabricator = {};
 
 
 /**
@@ -15,10 +15,10 @@ fabricator.options = {
   toggles: {
     labels: true,
     notes: true,
-    code: false,
+    code: false
   },
   menu: false,
-  mq: '(min-width: 60em)',
+  mq: '(min-width: 67.5rem)'
 };
 
 // open menu by default if large screen
@@ -56,7 +56,7 @@ fabricator.dom = {
   root: document.querySelector('html'),
   primaryMenu: document.querySelector('.f-menu'),
   menuItems: document.querySelectorAll('.f-menu li a'),
-  menuToggle: document.querySelector('.f-menu-toggle'),
+  menuToggle: document.querySelector('.f-menu-toggle')
 };
 
 
@@ -99,7 +99,8 @@ fabricator.setActiveItem = () => {
 
     // get current file and hash without first slash
     const loc = (window.location.pathname + window.location.hash);
-    const current = loc.replace(/(^\/)([^#]+)?(#[\w\-\.]+)?$/ig, (match, slash, file, hash) => {
+    const locRegex = /(^\/)([^#]+)?(#[\w\-.]+)?$/ig;
+    const current = loc.replace(locRegex, (match, slash, file, hash) => {
       return (file || '') + (hash || '').split('.')[0];
     }) || 'index.html';
 
@@ -188,7 +189,7 @@ fabricator.allItemsToggles = () => {
   const itemCache = {
     labels: document.querySelectorAll('[data-f-toggle="labels"]'),
     notes: document.querySelectorAll('[data-f-toggle="notes"]'),
-    code: document.querySelectorAll('[data-f-toggle="code"]'),
+    code: document.querySelectorAll('[data-f-toggle="code"]')
   };
 
   const toggleAllControls = document.querySelectorAll('.f-controls [data-f-toggle-control]');
@@ -225,7 +226,6 @@ fabricator.allItemsToggles = () => {
   };
 
   for (let i = 0; i < toggleAllControls.length; i++) {
-
     toggleAllControls[i].addEventListener('click', (e) => {
 
       // extract info from target node
@@ -234,9 +234,7 @@ fabricator.allItemsToggles = () => {
 
       // toggle the items
       toggleAllItems(type, value);
-
     });
-
   }
 
   // persist toggle options from page to page
@@ -309,12 +307,10 @@ fabricator.setInitialMenuState = () => {
   const mediaChangeHandler = (list) => {
     if (!list.matches) {
       root.classList.remove('f-menu-active');
+    } else if (fabricator.getOptions().menu) {
+      root.classList.add('f-menu-active');
     } else {
-      if (fabricator.getOptions().menu) {
-        root.classList.add('f-menu-active');
-      } else {
-        root.classList.remove('f-menu-active');
-      }
+      root.classList.remove('f-menu-active');
     }
   };
 
@@ -330,10 +326,12 @@ fabricator.setInitialMenuState = () => {
  * Initialization
  */
 fabricator
- .setInitialMenuState()
- .menuToggle()
- .allItemsToggles()
- .singleItemToggle()
- .buildColorChips()
- .setActiveItem()
- .bindCodeAutoSelect();
+  .setInitialMenuState()
+  .menuToggle()
+  .allItemsToggles()
+  .singleItemToggle()
+  .buildColorChips()
+  .setActiveItem()
+  .bindCodeAutoSelect();
+
+window.fabricator = fabricator;
