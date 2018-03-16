@@ -22,6 +22,8 @@
 
     svg {
       vertical-align: middle;
+      width: 0.875rem;
+      height: 0.875rem;
 
       use {
         fill: if($theme == $theme-dark, color(normal), color(light));
@@ -45,7 +47,7 @@
     height: 0.875rem;
 
     use {
-      fill: color(light);
+      fill: if($theme == $theme-dark, color(normal), color(light));
     }
   }
 }
@@ -53,6 +55,10 @@
 .f-control-bar {
   @include clearfix;
   padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  right: 1rem;
+  z-index: 4;
 }
 
 .f-menu-toggle {
@@ -72,5 +78,14 @@
     display: block;
     float: left;
     margin-bottom: -1px;
+  }
+}
+
+@media only screen and (max-width: ($base-min-width-minus-one)) {
+  .f-menu-active {
+    .f-control-bar {
+      max-width: calc(#{$menu-width} + #{$base-min-width});
+      margin-left: $menu-width;
+    }
   }
 }

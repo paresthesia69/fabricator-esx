@@ -8,11 +8,12 @@ const gulpif = require('gulp-if');
 const imagemin = require('gulp-imagemin');
 const prefix = require('gulp-autoprefixer');
 const rename = require('gulp-rename');
-const reload = browserSync.reload;
 const runSequence = require('run-sequence');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack');
+
+const {reload} = browserSync;
 
 // configuration
 const config = {
@@ -23,64 +24,64 @@ const config = {
     fabricator: {
       src: 'src/assets/fabricator/styles/fabricator.scss',
       dest: 'dist/assets/fabricator/styles',
-      watch: 'src/assets/fabricator/styles/**/*.scss',
+      watch: 'src/assets/fabricator/styles/**/*.scss'
     },
     toolkit: {
       src: 'src/assets/toolkit/styles/toolkit.scss',
       dest: 'dist/assets/toolkit/styles',
-      watch: 'src/assets/toolkit/styles/**/*.scss',
+      watch: 'src/assets/toolkit/styles/**/*.scss'
     },
     vendor: {
       src: 'src/assets/toolkit/styles/vendor.scss',
       dest: 'dist/assets/toolkit/styles',
-      watch: 'src/assets/toolkit/styles/vendor.scss',
+      watch: 'src/assets/toolkit/styles/vendor.scss'
     },
     demo: {
       src: 'src/assets/toolkit/styles/demo.scss',
       dest: 'dist/assets/toolkit/styles',
-      watch: 'src/assets/toolkit/styles/demo.scss',
-    },
+      watch: 'src/assets/toolkit/styles/demo.scss'
+    }
   },
   scripts: {
     fabricator: {
       src: './src/assets/fabricator/scripts/fabricator.js',
       dest: 'dist/assets/fabricator/scripts',
-      watch: 'src/assets/fabricator/scripts/**/*',
+      watch: 'src/assets/fabricator/scripts/**/*'
     },
     toolkit: {
       src: './src/assets/toolkit/scripts/toolkit.js',
       dest: 'dist/assets/toolkit/scripts',
-      watch: 'src/assets/toolkit/scripts/**/*',
+      watch: 'src/assets/toolkit/scripts/**/*'
     },
     vendor: {
       src: './src/assets/toolkit/scripts/vendor.js',
       dest: 'dist/assets/toolkit/scripts',
-      watch: 'src/assets/toolkit/scripts/vendor.js',
+      watch: 'src/assets/toolkit/scripts/vendor.js'
     },
     demo: {
       src: './src/assets/toolkit/scripts/demo.js',
       dest: 'dist/assets/toolkit/scripts',
-      watch: 'src/assets/toolkit/scripts/demo.js',
-    },
+      watch: 'src/assets/toolkit/scripts/demo.js'
+    }
   },
   images: {
     toolkit: {
       src: ['src/assets/toolkit/images/**/*', 'src/favicon.ico'],
       dest: 'dist/assets/toolkit/images',
-      watch: 'src/assets/toolkit/images/**/*',
-    },
+      watch: 'src/assets/toolkit/images/**/*'
+    }
   },
   fonts: {
     toolkit: {
       src: ['src/assets/toolkit/fonts/**/*'],
       dest: 'dist/assets/toolkit/fonts',
-      watch: 'src/assets/toolkit/fonts/**/*',
-    },
+      watch: 'src/assets/toolkit/fonts/**/*'
+    }
   },
   templates: {
-    watch: 'src/**/*.{html,md,json,yml}',
+    watch: 'src/**/*.{html,md,json,yml}'
   },
-  dest: 'dist',
+  dest: 'dist'
 };
 
 
@@ -104,9 +105,7 @@ gulp.task('styles:fabricator', () => {
 gulp.task('styles:toolkit', () => {
   gulp.src(config.styles.toolkit.src)
     .pipe(gulpif(config.dev, sourcemaps.init()))
-    .pipe(sass({
-      includePaths: './node_modules',
-    }).on('error', sass.logError))
+    .pipe(sass({includePaths: './node_modules'}).on('error', sass.logError))
     .pipe(prefix('last 1 version'))
     .pipe(gulpif(!config.dev, csso()))
     .pipe(gulpif(config.dev, sourcemaps.write()))
@@ -117,9 +116,7 @@ gulp.task('styles:toolkit', () => {
 gulp.task('styles:vendor', () => {
   gulp.src(config.styles.vendor.src)
     .pipe(gulpif(config.dev, sourcemaps.init()))
-    .pipe(sass({
-      includePaths: './node_modules',
-    }).on('error', sass.logError))
+    .pipe(sass({includePaths: './node_modules'}).on('error', sass.logError))
     .pipe(prefix('last 1 version'))
     .pipe(gulpif(!config.dev, csso()))
     .pipe(gulpif(config.dev, sourcemaps.write()))
@@ -130,9 +127,7 @@ gulp.task('styles:vendor', () => {
 gulp.task('styles:demo', () => {
   gulp.src(config.styles.demo.src)
     .pipe(gulpif(config.dev, sourcemaps.init()))
-    .pipe(sass({
-      includePaths: './node_modules',
-    }).on('error', sass.logError))
+    .pipe(sass({includePaths: './node_modules'}).on('error', sass.logError))
     .pipe(prefix('last 1 version'))
     .pipe(gulpif(!config.dev, csso()))
     .pipe(gulpif(config.dev, sourcemaps.write()))
@@ -184,7 +179,7 @@ gulp.task('fonts', () => {
 gulp.task('assembler', (done) => {
   assembler({
     logErrors: config.dev,
-    dest: config.dest,
+    dest: config.dest
   });
   done();
 });
@@ -195,10 +190,10 @@ gulp.task('serve', () => {
 
   browserSync({
     server: {
-      baseDir: config.dest,
+      baseDir: config.dest
     },
     notify: false,
-    logPrefix: 'FABRICATOR',
+    logPrefix: 'FABRICATOR'
   });
 
   gulp.task('assembler:watch', ['assembler'], browserSync.reload);
@@ -234,7 +229,7 @@ gulp.task('default', ['clean'], () => {
     'scripts',
     'images',
     'fonts',
-    'assembler',
+    'assembler'
   ];
 
   // run build

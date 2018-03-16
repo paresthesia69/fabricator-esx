@@ -6,23 +6,23 @@ const webpack = require('webpack');
  * @param {boolean} isDev If in development mode
  * @return {Array}
  */
-function getPlugins(config) {
+const getPlugins = (config) => {
 
   const plugins = [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({}),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({})
   ];
 
   const isDev = config.dev;
 
   if (isDev) {
-    plugins.push(new webpack.NoErrorsPlugin());
+    plugins.push(new webpack.NoEmitOnErrorsPlugin());
   } else {
     let uglifySettings = {minimize: true, sourceMap: false, compress: {warnings: false}};
     if (config.jsSourcemap) {
-      config.devtool = 'source-map';
       uglifySettings = {
-        minimize: false, sourceMap: config.jsSourcemap,
+        minimize: false,
+        sourceMap: config.jsSourcemap,
         compress: {drop_console: false, pure_funcs: ['console.log', 'console.warn']}
       };
     }
@@ -31,50 +31,32 @@ function getPlugins(config) {
   }
 
   return plugins;
-}
-
-/**
- * Define loaders
- * @return {Array}
- */
-function getLoaders() {
-
-  const loaders = [{
-    test: /(\.js)/,
-    exclude: /(node_modules)/,
-    loaders: ['babel'],
-  }, {
-    test: /(\.jpg|\.png)$/,
-    loader: 'url-loader?limit=10000',
-  }, {
-    test: /\.json/,
-    loader: 'json-loader',
-  }];
-
-  return loaders;
-
-}
-
+};
 
 module.exports = (config) => {
+  const devtoolConfig = (config.jsSourcemap) ? 'source-map' : false;
   return {
     entry: {
       'fabricator/scripts/f': config.scripts.fabricator.src,
       'toolkit/scripts/toolkit': config.scripts.toolkit.src,
       'toolkit/scripts/demo': config.scripts.demo.src,
-      'toolkit/scripts/vendor': config.scripts.vendor.src,
+      'toolkit/scripts/vendor': config.scripts.vendor.src
     },
     output: {
       path: path.resolve(__dirname, config.dest, 'assets'),
-      filename: '[name].js',
+      filename: '[name].js'
     },
-    devtool: 'source-map',
+    devtool: devtoolConfig,
     resolve: {
-      extensions: ['', '.js'],
+      extensions: ['.js']
     },
     plugins: getPlugins(config),
     module: {
-      loaders: getLoaders(),
-    },
+      rules: [
+        {test: /(\.js)/, exclude: /(node_modules)/, use: ['babel-loader']},
+        {test: /(\.jpg|\.png)$/, use: 'url-loader?limit=10000'},
+        {test: /\.json/, use: 'json-loader'}
+      ]
+    }
   };
 };

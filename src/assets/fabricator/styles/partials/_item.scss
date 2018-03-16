@@ -2,18 +2,17 @@
 
 .f-item-group {
   @include clearfix;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 1rem;
   border-bottom: 1px solid color(light);
 
-  @media only screen and (max-width: 1079px) {
+  @media only screen and (max-width: $base-min-width-minus-one) {
     padding-left: 0;
   }
 
   @media (min-width: $base-min-width) {
-    max-width: 1280px;
     margin: 0 auto;
   }
 
@@ -56,8 +55,22 @@
   justify-content: center;
   flex-wrap: wrap;
 
-  @media only screen and (max-width: 1079px) {
+  @media only screen and (max-width: $base-min-width-minus-one) {
 
+  }
+}
+
+.f-item-preview {
+  @include clearfix;
+  padding: 1rem 0 0 0;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media only screen and (max-width: $base-min-width-minus-one) {
+    //text-align: center;
   }
 }
 
@@ -70,7 +83,7 @@
   margin-bottom: 1rem;
   vertical-align: middle;
 
-  @media only screen and (max-width: 1079px) {
+  @media only screen and (max-width: $base-min-width-minus-one) {
     padding-left: 1rem;
   }
 }

@@ -34,6 +34,7 @@ $colors: map-merge($base-colors, $theme);
 
 $menu-width: map-get($settings, menu-width);
 $base-min-width: map-get($settings, base-min-width);
+$base-min-width-minus-one: $base-min-width - 0.0625rem;
 
 // functions
 @function color($color) {

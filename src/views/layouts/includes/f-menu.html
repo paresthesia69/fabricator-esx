@@ -10,7 +10,7 @@
 		</li>
 
 		{{#each materials}}
-		<li>
+		<li class="f-materials-menu-{{@key}}">
 			<a href="{{@key}}.html" class="f-menu__heading">{{name}}</a>
 			<ul>
 				{{#each items}}
@@ -23,7 +23,7 @@
 		{{/each}}
 
 		{{#each views}}
-		<li>
+		<li class="f-views-menu-{{@key}}">
 			<a href="{{@key}}.html" class="f-menu__heading">{{name}}</a>
 			<ul>
 				{{#each items}}
@@ -35,7 +35,7 @@
 		</li>
 		{{/each}}
 
-		<li>
+		<li class="f-docs-menu-{{@key}}">
 			<a href="docs.html" class="f-menu__heading">Docs</a>
 			<ul>
 				{{#each docs}}

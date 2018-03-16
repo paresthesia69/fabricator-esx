@@ -1,5 +1,3 @@
 /**
  * Toolkit Demo JavaScript
  */
-
-

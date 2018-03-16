@@ -1,6 +1,7 @@
 @import "variables";
 
 html {
+  box-sizing: border-box;
   height: 100%;
 
   &.f-menu-active {
@@ -12,6 +13,11 @@ html {
   }
 }
 
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
 body {
   margin: 0;
   position: relative;
@@ -19,11 +25,7 @@ body {
   .f-menu-active & {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-
-    @media (min-width: $base-min-width) {
-      overflow: auto;
-    }
+    overflow: auto;
   }
 }
 
@@ -37,7 +39,6 @@ body {
 
   .f-menu-active & {
     @media (min-width: $base-min-width) {
-      max-width: calc(#{$menu-width} + 1280px);
       margin-left: $menu-width;
       transform: translate(0, 0);
     }
@@ -45,13 +46,13 @@ body {
 
 }
 
-@media only screen and (max-width: 1079px) {
+@media only screen and (max-width: ($base-min-width-minus-one)) {
   .f-container {
-    padding: 0;
+    padding: 0 .5rem;
   }
 }
 
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: $base-min-width) {
   .f-container {
     padding: 0 1em;
   }
