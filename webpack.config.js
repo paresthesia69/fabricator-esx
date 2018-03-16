@@ -26,8 +26,7 @@ const getPlugins = (config) => {
         compress: {drop_console: false, pure_funcs: ['console.log', 'console.warn']}
       };
     }
-    plugins.push(new webpack.optimize.DedupePlugin());
-    plugins.push(new webpack.optimize.UglifyJsPlugin(uglifySettings));
+    plugins.push(new webpack.LoaderOptionsPlugin(uglifySettings));
   }
 
   return plugins;
