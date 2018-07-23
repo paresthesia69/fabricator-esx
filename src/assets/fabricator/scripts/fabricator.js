@@ -1,17 +1,17 @@
 require('./prism');
 
 /**
- * Global `fabricator` object
+ * Global `fabricatorInMem` object
  * @namespace
  */
-const fabricator = {};
+const fabricatorInMem = {};
 
 
 /**
  * Default options
  * @type {Object}
  */
-fabricator.options = {
+fabricatorInMem.options = {
   toggles: {
     labels: true,
     notes: true,
@@ -22,16 +22,16 @@ fabricator.options = {
 };
 
 // open menu by default if large screen
-fabricator.options.menu = window.matchMedia(fabricator.options.mq).matches;
+fabricatorInMem.options.menu = window.matchMedia(fabricatorInMem.options.mq).matches;
 
 /**
  * Feature detection
  * @type {Object}
  */
-fabricator.test = {};
+fabricatorInMem.test = {};
 
 // test for sessionStorage
-fabricator.test.sessionStorage = (() => {
+fabricatorInMem.test.sessionStorage = (() => {
   const test = '_f';
   try {
     sessionStorage.setItem(test, test);
@@ -43,8 +43,8 @@ fabricator.test.sessionStorage = (() => {
 })();
 
 // create storage object if it doesn't exist; store options
-if (fabricator.test.sessionStorage) {
-  sessionStorage.fabricator = sessionStorage.fabricator || JSON.stringify(fabricator.options);
+if (fabricatorInMem.test.sessionStorage) {
+  sessionStorage.fabricatorInMem = sessionStorage.fabricatorInMem || JSON.stringify(fabricatorInMem.options);
 }
 
 
@@ -52,7 +52,7 @@ if (fabricator.test.sessionStorage) {
  * Cache DOM
  * @type {Object}
  */
-fabricator.dom = {
+fabricatorInMem.dom = {
   root: document.querySelector('html'),
   primaryMenu: document.querySelector('.f-menu'),
   menuItems: document.querySelectorAll('.f-menu li a'),
@@ -64,15 +64,15 @@ fabricator.dom = {
  * Get current option values from session storage
  * @return {Object}
  */
-fabricator.getOptions = () => {
-  return (fabricator.test.sessionStorage) ? JSON.parse(sessionStorage.fabricator) : fabricator.options;
+fabricatorInMem.getOptions = () => {
+  return (fabricatorInMem.test.sessionStorage) ? JSON.parse(sessionStorage.fabricatorInMem) : fabricatorInMem.options;
 };
 
 
 /**
  * Build color chips
  */
-fabricator.buildColorChips = () => {
+fabricatorInMem.buildColorChips = () => {
 
   const chips = document.querySelectorAll('.f-color-chip');
 
@@ -82,7 +82,7 @@ fabricator.buildColorChips = () => {
     chips[i].style.borderBottomColor = color;
   }
 
-  return fabricator;
+  return fabricatorInMem;
 
 };
 
@@ -90,7 +90,7 @@ fabricator.buildColorChips = () => {
 /**
  * Add `f-active` class to active menu item
  */
-fabricator.setActiveItem = () => {
+fabricatorInMem.setActiveItem = () => {
 
   /**
    * Match the window location with the menu item, set menu item as active
@@ -106,9 +106,9 @@ fabricator.setActiveItem = () => {
 
 
     // find the current section in the items array
-    for (let i = fabricator.dom.menuItems.length - 1; i >= 0; i--) {
+    for (let i = fabricatorInMem.dom.menuItems.length - 1; i >= 0; i--) {
 
-      const item = fabricator.dom.menuItems[i];
+      const item = fabricatorInMem.dom.menuItems[i];
 
       // get item href without first slash
       const href = item.getAttribute('href').replace(/^\//g, '');
@@ -127,28 +127,28 @@ fabricator.setActiveItem = () => {
 
   setActive();
 
-  return fabricator;
+  return fabricatorInMem;
 
 };
 
 
 /**
  * Click handler to primary menu toggle
- * @return {Object} fabricator
+ * @return {Object} fabricatorInMem
  */
-fabricator.menuToggle = () => {
+fabricatorInMem.menuToggle = () => {
 
   // shortcut menu DOM
-  const toggle = fabricator.dom.menuToggle;
-  const options = fabricator.getOptions();
+  const toggle = fabricatorInMem.dom.menuToggle;
+  const options = fabricatorInMem.getOptions();
 
   // toggle classes on certain elements
   const toggleClasses = () => {
-    options.menu = !fabricator.dom.root.classList.contains('f-menu-active');
-    fabricator.dom.root.classList.toggle('f-menu-active');
+    options.menu = !fabricatorInMem.dom.root.classList.contains('f-menu-active');
+    fabricatorInMem.dom.root.classList.toggle('f-menu-active');
 
-    if (fabricator.test.sessionStorage) {
-      sessionStorage.setItem('fabricator', JSON.stringify(options));
+    if (fabricatorInMem.test.sessionStorage) {
+      sessionStorage.setItem('fabricatorInMem', JSON.stringify(options));
     }
   };
 
@@ -166,25 +166,25 @@ fabricator.menuToggle = () => {
 
   // close menu when clicking on item (for collapsed menu view)
   const closeMenu = () => {
-    if (!window.matchMedia(fabricator.options.mq).matches) {
+    if (!window.matchMedia(fabricatorInMem.options.mq).matches) {
       toggleClasses();
     }
   };
 
-  for (let i = 0; i < fabricator.dom.menuItems.length; i++) {
-    fabricator.dom.menuItems[i].addEventListener('click', closeMenu);
+  for (let i = 0; i < fabricatorInMem.dom.menuItems.length; i++) {
+    fabricatorInMem.dom.menuItems[i].addEventListener('click', closeMenu);
   }
 
-  return fabricator;
+  return fabricatorInMem;
 
 };
 
 
 /**
  * Handler for preview and code toggles
- * @return {Object} fabricator
+ * @return {Object} fabricatorInMem
  */
-fabricator.allItemsToggles = () => {
+fabricatorInMem.allItemsToggles = () => {
 
   const itemCache = {
     labels: document.querySelectorAll('[data-f-toggle="labels"]'),
@@ -193,7 +193,7 @@ fabricator.allItemsToggles = () => {
   };
 
   const toggleAllControls = document.querySelectorAll('.f-controls [data-f-toggle-control]');
-  const options = fabricator.getOptions();
+  const options = fabricatorInMem.getOptions();
 
   // toggle all
   const toggleAllItems = (type, value) => {
@@ -219,8 +219,8 @@ fabricator.allItemsToggles = () => {
     // update options
     options.toggles[type] = value;
 
-    if (fabricator.test.sessionStorage) {
-      sessionStorage.setItem('fabricator', JSON.stringify(options));
+    if (fabricatorInMem.test.sessionStorage) {
+      sessionStorage.setItem('fabricatorInMem', JSON.stringify(options));
     }
 
   };
@@ -242,7 +242,7 @@ fabricator.allItemsToggles = () => {
     toggleAllItems(key, options.toggles[key]);
   });
 
-  return fabricator;
+  return fabricatorInMem;
 
 };
 
@@ -250,7 +250,7 @@ fabricator.allItemsToggles = () => {
 /**
  * Handler for single item code toggling
  */
-fabricator.singleItemToggle = () => {
+fabricatorInMem.singleItemToggle = () => {
 
   const itemToggleSingle = document.querySelectorAll('.f-item-group [data-f-toggle-control]');
 
@@ -265,7 +265,7 @@ fabricator.singleItemToggle = () => {
     itemToggleSingle[i].addEventListener('click', toggleSingleItemCode);
   }
 
-  return fabricator;
+  return fabricatorInMem;
 
 };
 
@@ -273,7 +273,7 @@ fabricator.singleItemToggle = () => {
 /**
  * Automatically select code when code block is clicked
  */
-fabricator.bindCodeAutoSelect = () => {
+fabricatorInMem.bindCodeAutoSelect = () => {
 
   const codeBlocks = document.querySelectorAll('.f-item-code');
 
@@ -296,18 +296,18 @@ fabricator.bindCodeAutoSelect = () => {
  * Open/Close menu based on session var.
  * Also attach a media query listener to close the menu when resizing to smaller screen.
  */
-fabricator.setInitialMenuState = () => {
+fabricatorInMem.setInitialMenuState = () => {
 
   // root element
   const root = document.querySelector('html');
 
-  const mq = window.matchMedia(fabricator.options.mq);
+  const mq = window.matchMedia(fabricatorInMem.options.mq);
 
   // if small screen
   const mediaChangeHandler = (list) => {
     if (!list.matches) {
       root.classList.remove('f-menu-active');
-    } else if (fabricator.getOptions().menu) {
+    } else if (fabricatorInMem.getOptions().menu) {
       root.classList.add('f-menu-active');
     } else {
       root.classList.remove('f-menu-active');
@@ -317,7 +317,7 @@ fabricator.setInitialMenuState = () => {
   mq.addListener(mediaChangeHandler);
   mediaChangeHandler(mq);
 
-  return fabricator;
+  return fabricatorInMem;
 
 };
 
@@ -325,7 +325,7 @@ fabricator.setInitialMenuState = () => {
 /**
  * Initialization
  */
-fabricator
+fabricatorInMem
   .setInitialMenuState()
   .menuToggle()
   .allItemsToggles()
@@ -334,4 +334,4 @@ fabricator
   .setActiveItem()
   .bindCodeAutoSelect();
 
-window.fabricator = fabricator;
+window.fabricator = fabricatorInMem;
