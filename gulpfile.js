@@ -1,4 +1,4 @@
-const assembler = require('fabricator-assemble');
+const assembler = require('fabricator-esx-assemble');
 const browserSync = require('browser-sync');
 const csso = require('gulp-csso');
 const del = require('del');
