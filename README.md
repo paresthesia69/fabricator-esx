@@ -5,7 +5,8 @@
   <img src="http://fbrctr.github.io/assets/toolkit/images/logo.svg" width="500">
 </p>
 
-# Fabricator-ESX
+# Fabricator-ESX DEPRECATED!!!!
+## Use original the original [Fabricator](https://github.com/fbrctr/fabricator) which has been updated with latest dependencies.
 
 > _fabricate_ - to make by assembling parts or sections.
 > _esx_ - using modern build to follow modern ES coding semantics.
